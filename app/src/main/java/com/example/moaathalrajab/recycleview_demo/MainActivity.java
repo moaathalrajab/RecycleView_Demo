@@ -10,30 +10,51 @@ import android.support.v7.widget.RecyclerView;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    RecyclerView recyclerView;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private List<Item> itemList = new ArrayList<Item>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mRecyclerView = (RecyclerView) findViewById(R.id.item_list);
+        mRecyclerView.setHasFixedSize(true);
 
-        // Initializing list view with the custom adapter
-        ArrayList <Item> itemList = new ArrayList<Item>();
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ItemArrayAdapter itemArrayAdapter = new ItemArrayAdapter(R.layout.list_item, itemList);
-        recyclerView = (RecyclerView) findViewById(R.id.item_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(itemArrayAdapter);
+        mAdapter = new ItemArrayAdapter(getBaseContext(), itemList);
+        mRecyclerView.setAdapter(mAdapter);
 
-        // Populating list items
-        for(int i=0; i<100; i++) {
-            itemList.add(new Item("Item " + i));
-        }
-
+        fillWithNonsenseText();
     }
 
+    public void fillWithNonsenseText() {
+        itemList.add(new Item(1,"Hello", "Ben"));
+        itemList.add(new Item(2,"Hello", "Noor"));
+        itemList.add(new Item(3,"This is an example about RecyclerView", "Ben"));
+        itemList.add(new Item(4,"Great news!", "Noor"));
+        itemList.add(new Item(5,"Enjoy reading!", "Ben"));
+        itemList.add(new Item(6,"You too", "Noor"));
+        itemList.add(new Item(7,"Hello", "Ben"));
+        itemList.add(new Item(8,"Hello", "Noor"));
+        itemList.add(new Item(9,"This is an example about RecyclerView", "Ben"));
+        itemList.add(new Item(10,"Great news!", "Noor"));
+        itemList.add(new Item(11,"Enjoy reading!", "Ben"));
+        itemList.add(new Item(12,"You too", "Noor"));
+        itemList.add(new Item(13,"Hello", "Ben"));
+        itemList.add(new Item(14,"Hello", "Noor"));
+        itemList.add(new Item(15,"This is an example about RecyclerView", "Ben"));
+        itemList.add(new Item(16,"Great news!", "Noor"));
+        itemList.add(new Item(17,"Enjoy reading!", "Ben"));
+        itemList.add(new Item(18,"You too", "Noor"));
+
+    }
 }
+
+
